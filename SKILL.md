@@ -40,24 +40,26 @@ Ask these questions systematically, waiting for responses before proceeding:
    - 3+ years = Experienced
 
 3. **Recent training**: "What has your training looked like recently?"
-   - Weekly mileage or days per week for last 4 weeks
+   - How many days per week running (last 4 weeks)
+   - Weekly mileage or total time per week
    - Typical run distances
    - Consistency level
 
-4. **Injury history**: "Have you had any injuries in the last 6 months? Any current pain or discomfort?"
+4. **Desired frequency**: "How many days per week would you like to run during this training plan?"
+   - Must ask this explicitly
+   - Compare to current frequency - if increasing days/week, this counts as one variable change
+   - Days per week will determine number of runs in weekly plan
+
+5. **Injury history**: "Have you had any injuries in the last 6 months? Any current pain or discomfort?"
    - Specific injuries and affected areas
    - Whether fully healed
    - Any chronic/recurring issues
    - Current pain level (if any)
 
-5. **Goal**: "What's your training goal?"
+6. **Goal**: "What's your training goal?"
    - Race distance (5K, 10K, half marathon, marathon, other)
    - Target date or timeframe
    - Goal type (finish, specific time, PR)
-
-6. **Availability**: "How many days per week can you run?"
-   - Days per week available
-   - Any scheduling constraints (work travel, etc.)
 
 #### Additional Helpful Information (Ask as Follow-ups)
 
@@ -71,6 +73,7 @@ Ask these questions systematically, waiting for responses before proceeding:
 9. **Other factors** (if relevant):
    - Prior athletic background
    - Current life stress, sleep quality
+   - Any scheduling constraints (work travel, etc.)
    - Any other constraints or considerations
 
 #### Confirmation Before Plan Generation
@@ -170,36 +173,46 @@ Read `references/training-load-principles.md` to understand:
 
 **Critical rule**: Progress only ONE variable at a time (frequency, duration, OR intensity - never multiple simultaneously).
 
-### Step 5: Structure the Weekly Schedule
+### Step 5: Determine Weekly Run Distribution
 
-Distribute workouts based on available days and experience level:
+Based on the runner's desired frequency, determine the types and distribution of runs each week:
 
 **3 days/week** (beginner or time-limited):
-- Run 1: Easy run
-- Run 2: Long run (weekend)
-- Run 3: Easy run or easy with strides
+- 2 easy runs
+- 1 long run
+- Add strides to one easy run after base phase
+- Introduce one workout (tempo or intervals) only after solid base established
 
 **4 days/week** (intermediate):
-- Run 1: Easy run
-- Run 2: Workout (tempo or intervals - introduced after base phase)
-- Run 3: Easy run
-- Run 4: Long run (weekend)
+- 2 easy runs
+- 1 workout (tempo or intervals - introduced after base phase)
+- 1 long run
+- Can add strides to easy runs
 
 **5 days/week** (intermediate to advanced):
-- Run 1: Easy run
-- Run 2: Workout #1 (tempo or intervals)
-- Run 3: Easy run or recovery run
-- Run 4: Workout #2 (different stimulus than workout #1)
-- Run 5: Long run (weekend)
+- 2-3 easy runs (one may be recovery run)
+- 1-2 workouts (different stimulus - e.g., tempo + intervals)
+- 1 long run
+- Strides added to easy runs regularly
 
 **6-7 days/week** (advanced):
-- Add recovery runs on "rest" days
-- Two quality sessions per week
-- Adequate easy volume between hard efforts
+- 3-4 easy/recovery runs
+- 2 quality sessions per week (tempo, intervals, etc.)
+- 1 long run
+- May include double-run days for high volume
 
-**Workout day spacing**: Hard workouts should have at least one easy day between them. Never schedule hard workouts on consecutive days.
+**Workout distribution principles**:
+- Hard workouts need at least one easy day between them
+- Long run is typically the longest single effort of the week
+- Easy runs make up 60-80% of weekly volume (80/20 rule)
+- Strides (short 20-30 sec bursts) can be added to easy runs without counting as "intensity"
+- Recovery runs (when doing 6+ days/week) are shorter and easier than regular easy runs
+
+**Note**: Since plans don't assign specific days, remind runners to space hard efforts appropriately when scheduling their own week.
 
 ### Step 6: Create Week-by-Week Plan
+
+**IMPORTANT**: Plans should list runs for each week WITHOUT assigning them to specific days. Let runners schedule runs based on their own calendar and preferences.
 
 Generate a markdown document with this structure:
 
@@ -208,43 +221,110 @@ Generate a markdown document with this structure:
 
 ## Plan Overview
 - Goal: [Race distance and date, or fitness goal]
-- Duration: [X weeks]
-- Weekly schedule: [X days per week]
+- Current training: [X days/week, Y miles/week]
+- Plan structure: [X days per week, Y weeks total]
+- Start date: [Date if provided, or "Start when ready"]
 - Approach: [Conservative/Moderate/Standard] based on [risk factors]
 
 ## Training Paces
 [List each zone with effort description and estimated pace range]
 
-## Week 1: [Theme, e.g., "Base Building"]
-**Weekly Volume**: [X miles/minutes]
-**Focus**: [What this week emphasizes]
+**Example:**
+- **Easy/Conversational**: 9:30-10:00 min/mile - Should be able to hold full conversation
+- **Tempo/Threshold**: 8:15-8:30 min/mile - Comfortably hard, can speak short phrases
+- **Interval/5K Pace**: 7:45-8:00 min/mile - Hard effort, only 1-2 words at a time
+- **Long Run**: 9:30-10:00 min/mile early, can progress to 9:00-9:15 in final miles
 
-### Monday: Rest or Cross-training
+## How to Use This Plan
+- Schedule runs on days that work for your calendar
+- Ideally space runs throughout the week (avoid back-to-back hard efforts)
+- If you need to shuffle runs, keep hard workouts separated by at least one easy day
+- Rest days are flexible - take them when needed
+- [If frequency is increasing from current]: We're building from X to Y days per week gradually
 
-### Tuesday: Easy Run
-**Distance**: 4 miles
-**Pace**: Easy/conversational (9:30-10:00 min/mile)
-**Details**: This should feel comfortable. You should be able to hold a conversation throughout. Better to go slower than faster on easy days.
+## Week 1: October 26 - November 1 | Base Building | ACWR: 1.15
+**Weekly Volume**: 18 miles
+**Focus**: Establishing consistent easy mileage
 
-### Wednesday: Rest
+**Runs this week (4 total):**
 
-### Thursday: Easy Run with Strides
-**Distance**: 5 miles easy + 4 strides
-**Pace**: Easy (9:30-10:00 min/mile) for the main run
-**Details**: Run 5 miles at easy pace. After completing the run, do 4 × 20-second strides at 90% effort with full recovery walk back between each. Strides improve form and leg turnover.
+1. **Easy Run**: 4 miles at easy pace (9:30-10:00 min/mile)
+   - Focus on conversational pace, building aerobic base
 
-[Continue for each day...]
+2. **Easy Run**: 5 miles at easy pace (9:30-10:00 min/mile)
+   - Stay relaxed and comfortable
 
-## Week 2: [Theme]
+3. **Easy Run with Strides**: 4 miles easy + 4 strides
+   - After the easy miles, do 4 × 20 seconds at 90% effort with full recovery between
+   - Strides improve form and leg turnover
+
+4. **Long Run**: 5 miles at easy pace (9:30-10:00 min/mile)
+   - Can be slightly slower if needed, focus on time on feet
+
+## Week 2: November 2-8 | Build | ACWR: 1.18
+**Weekly Volume**: 20 miles
+**Focus**: Gradual volume increase
+
+**Runs this week (4 total):**
+
+1. **Easy Run**: 5 miles at easy pace
+   - Keep it conversational
+
+2. **Easy Run**: 5 miles at easy pace
+   - Focus on consistent effort
+
+3. **Easy Run with Strides**: 4 miles easy + 6 strides
+   - 6 × 20 seconds at ~90% effort
+
+4. **Long Run**: 6 miles at easy pace
+   - Building endurance, stay patient with pace
+
+[Continue for all weeks...]
+
+## Week 4: November 16-22 | Deload/Recovery | ACWR: 0.88
+**Weekly Volume**: 14 miles (30% reduction from peak)
+**Focus**: Recovery and adaptation
+
+**Runs this week (4 total):**
+
+1. **Recovery Run**: 3 miles very easy
+   - Extra easy today, focus on feeling good
+
+2. **Easy Run**: 4 miles at easy pace
+   - Comfortable effort
+
+3. **Easy Run**: 4 miles at easy pace
+   - Enjoy the lower volume week
+
+4. **Long Run**: 5 miles at easy pace
+   - Shorter than usual, allow body to recover
+
+**Note**: This is a scheduled recovery week. The reduced volume allows your body to absorb the previous weeks' training and adapt. You should feel fresh and ready to build again next week.
+
 [Continue pattern...]
 ```
 
-**For each workout, include**:
-1. Workout type (Easy Run, Long Run, Tempo, Intervals, etc.)
+**For each week's heading, include**:
+1. Week number
+2. Date range (calculate from start date or race date working backward)
+3. Week theme/type (Base Building, Build, Peak, Deload, Taper, etc.)
+4. ACWR value (calculate using the script or estimated based on progression)
+
+**For each run, include**:
+1. Run type (Easy Run, Long Run, Tempo Run, Interval Workout, Recovery Run, etc.)
 2. Distance or duration
 3. Pace with range and effort description
-4. Detailed instructions on how to execute
-5. Purpose or focus
+4. Brief instruction on execution or focus
+5. Purpose or specific notes when relevant
+
+**Key principles**:
+- List runs as numbered items, not assigned to specific days
+- Include total number of runs for the week
+- Provide flexibility for runners to schedule themselves
+- Include notes about spacing hard workouts when relevant
+- Mark deload weeks clearly with reduced volume
+- Calculate and show ACWR for each week
+- Include date ranges to help with planning
 
 ### Step 7: Include Guidance and Modifications
 
@@ -423,19 +503,27 @@ First, how old are you?"
 
 **User**: "I've been running 3-4 times per week, probably around 15-20 miles per week"
 
-**Claude**: "Perfect. Have you had any injuries in the last 6 months, or do you have any current pain or discomfort?"
+**Claude**: "Perfect. How many days per week would you like to run during this training plan?"
+
+**User**: "I'd like to bump it up to 4 days consistently"
+
+**Claude**: "Great - we'll build from 3-4 days up to a consistent 4 days. Have you had any injuries in the last 6 months, or do you have any current pain or discomfort?"
 
 **User**: "No injuries, feeling good"
 
-**Claude**: "Excellent! And you mentioned you just ran a 10K in 55 minutes - when was that race?"
+**Claude**: "Excellent! What's your goal for this training?"
+
+**User**: "I want to run a half marathon in 12 weeks"
+
+**Claude**: "Perfect. Do you have a specific race date, or is this a general 12-week timeframe?"
+
+**User**: "I have a race on February 15th"
+
+**Claude**: "Great! And you mentioned earlier you just ran a 10K in 55 minutes - when was that race?"
 
 **User**: "Two weeks ago"
 
-**Claude**: "Perfect. How many days per week can you commit to running for this training plan?"
-
-**User**: "I can do 4 days per week"
-
-**Claude**: "Great! Are you looking for a conservative approach focused on staying injury-free, or are you comfortable pushing a bit harder with a more aggressive progression?"
+**Claude**: "Perfect. Are you looking for a conservative approach focused on staying injury-free, or are you comfortable pushing a bit harder with a more aggressive progression?"
 
 **User**: "I'd prefer to stay conservative and just finish strong"
 
@@ -443,10 +531,10 @@ First, how old are you?"
 - Age: 32
 - Experience: 18 months of consistent running
 - Recent training: 15-20 miles/week over 3-4 days
+- Plan frequency: 4 days per week consistently
 - Injury history: None currently, feeling good
 - Recent performance: 10K in 55 minutes (2 weeks ago)
-- Goal: Half marathon in 12 weeks, finish strong
-- Availability: 4 days per week
+- Goal: Half marathon on February 15th (12 weeks), finish strong
 - Approach: Conservative, injury prevention focused
 
 Do you have any other information you'd like me to know before I create your training plan? Any scheduling constraints, previous injuries I should know about, or other considerations?"
@@ -471,10 +559,20 @@ Do you have any other information you'd like me to know before I create your tra
 ## Output Format
 
 Always create training plans as **markdown documents** with:
-- Clear week-by-week structure
-- Daily workout details
-- Explanatory headers
-- Embedded guidance and modifications
+- Clear week-by-week structure with date ranges
+- ACWR calculated and displayed for each week
+- Week themes (Base Building, Build, Peak, Deload, Taper, etc.)
+- Weekly volume and focus
+- Runs listed without specific day assignments (numbered list)
+- Detailed workout descriptions with paces and instructions
+- Explanatory headers and guidance sections
 - Conversational tone with specific instructions
 
-Plans should be easily printable, savable, and modifiable. Use headers, bold text for emphasis, and clear structure for scannability.
+**Key formatting elements**:
+- Week heading: `## Week X: [Date Range] | [Theme] | ACWR: X.XX`
+- Weekly volume and focus in bold
+- Runs as numbered list with type, distance, pace, and details
+- Include "How to Use This Plan" section explaining flexibility
+- Note when building frequency (if increasing days/week from current)
+
+Plans should be easily printable, savable, and modifiable. Runners schedule their own days based on their calendar and preferences. Use headers, bold text for emphasis, and clear structure for scannability.
