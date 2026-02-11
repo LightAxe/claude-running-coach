@@ -3,6 +3,11 @@ name: running-training-plans
 description: Create personalized running training plans, modify existing plans, analyze running performance, and provide injury prevention guidance. Use when users ask about training schedules, building a running plan, preparing for races (5K, 10K, half marathon, marathon), increasing running distance or speed, or managing training load to prevent injuries. Supports creating week-by-week plans with detailed daily workouts, calculating training paces, assessing injury risk, and adjusting plans for missed workouts or life events.
 ---
 
+<!--
+Copyright (c) 2026 Rob Ogilvie
+Licensed under the MIT License - see LICENSE file for details
+-->
+
 # Running Training Plans
 
 This skill helps create evidence-based running training plans that balance performance goals with injury prevention. Plans are built around managing the acute:chronic workload ratio (ACWR) to minimize injury risk while safely progressing toward race or fitness goals.

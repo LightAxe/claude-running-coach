@@ -173,7 +173,11 @@ Contributions are welcome! Please feel free to submit issues or pull requests wi
 
 ## License
 
-This skill is provided as-is for use with Claude AI. Feel free to modify and adapt for your own use.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Copyright (c) 2026 Rob Ogilvie
+
+You are free to use, modify, and distribute this skill, including for commercial purposes, as long as you include the copyright notice and license text in any copies or substantial portions of the work.
 
 ## Version
 

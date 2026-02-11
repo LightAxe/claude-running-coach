@@ -4,6 +4,9 @@ Calculate Acute:Chronic Workload Ratio (ACWR) from training data.
 
 This script helps calculate ACWR to monitor injury risk in training plans.
 ACWR = Acute Load (last week) / Chronic Load (average of last 4 weeks)
+
+Copyright (c) 2026 Rob Ogilvie
+Licensed under the MIT License - see LICENSE file for details
 """
 
 def calculate_acwr(weekly_loads):
