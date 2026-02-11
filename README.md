@@ -8,11 +8,15 @@ This skill enables Claude to create comprehensive training plans for runners of 
 
 ## Key Features
 
+- **Three Training Profiles**: Choose Conservative (injury prevention focus), Moderate (balanced 80/20), or Performance-Focused (speed priority with higher intensity)
+- **Pace Variation for Injury Prevention**: Integrates strides, micro-intervals, and varied workouts to prevent overuse injuries from repetitive strain
+- **Strides Integration**: Research-backed 20-30 second bursts improve running economy by 2% with minimal injury risk, included 2-3x/week
 - **Strava Integration**: Optional automatic data import from Strava via MCP server for accurate training history analysis
-- **Personalized Plans**: Customized based on age, experience, injury history, and goals
-- **Injury Prevention**: Uses Acute:Chronic Workload Ratio (ACWR) to keep injury risk low
-- **Progressive Training**: Safe weekly increases with mandatory deload weeks every 3-4 weeks
-- **Detailed Workouts**: Daily workout specifications with paces, distances, and effort descriptions
+- **Post-Race Planning**: Specialized protocols for experienced runners building to next race after recovery period
+- **Personalized Plans**: Customized based on age, experience, injury history, goals, and speed vs. safety preference
+- **Injury Prevention**: Uses Acute:Chronic Workload Ratio (ACWR) with single-session spike monitoring
+- **Progressive Training**: Safe weekly increases (5-20% depending on profile) with mandatory deload weeks
+- **Detailed Workouts**: Daily workout specifications with paces, distances, effort descriptions, and stride explanations
 - **Flexible Modifications**: Guidance for missed workouts, injuries, and life disruptions
 - **Multiple Race Distances**: Supports 5K, 10K, half marathon, marathon, and general fitness
 
@@ -42,19 +46,58 @@ running-training-plans/
 When creating a training plan, Claude follows this process:
 
 1. **Check for Strava** (optional): Attempts to connect to Strava MCP to automatically pull recent training data
-2. **Gather Information**: Uses Strava data or systematically asks about age, experience, recent training, injuries, goals, and availability
-3. **Confirm Readiness**: Summarizes information and waits for user confirmation
-4. **Assess Risk**: Calculates injury risk score and determines appropriate conservativeness
-5. **Calculate Paces**: Determines training zones from recent runs, race times, or conversational pace
-6. **Design Progression**: Plans safe weekly increases maintaining ACWR 0.8-1.3
-7. **Structure Schedule**: Distributes workouts based on available days and experience
-8. **Create Plan**: Generates week-by-week markdown document with detailed daily workouts
+2. **Gather Information**: Uses Strava data or systematically asks about age, experience, recent training, injuries, goals, and training profile preference
+3. **Select Training Profile**: Choose Conservative, Moderate, or Performance-Focused based on goals and experience
+4. **Confirm Readiness**: Summarizes information and waits for user confirmation
+5. **Assess Risk**: Calculates injury risk score and provides guidance if mismatch with chosen profile
+6. **Calculate Paces**: Determines training zones from recent runs, race times, or conversational pace
+7. **Design Progression**: Plans weekly increases (5-20% based on profile) maintaining appropriate ACWR range
+8. **Structure Schedule**: Distributes workouts, strides, and intensity based on profile and available days
+9. **Create Plan**: Generates week-by-week markdown document with detailed daily workouts and stride explanations
+
+## Training Profiles
+
+This skill offers three evidence-based training approaches:
+
+### Conservative (Injury Prevention Priority)
+- **Best for**: Beginners, injury-prone runners, those over 40, returning from injury
+- **Intensity**: 85% easy / 15% hard (true beginners: start 90-100% easy for first 2-3 months)
+- **Workouts**: 1 quality session per week
+- **Strides**: 2x per week (after initial weeks)
+- **ACWR**: 0.8-1.2
+- **Progression**: 5-10% max during build weeks (3 weeks up, 1 week down pattern)
+- **Speed work**: Week 4-6 for intermediate; week 8-12 for true beginners
+
+### Moderate (Balanced Approach)
+- **Best for**: Intermediate runners (1-3 years), injury-free with solid base
+- **Intensity**: 80% easy / 20% hard (true 80/20 rule)
+- **Workouts**: 1-2 quality sessions per week (build from 1 to 2)
+- **Strides**: 3x per week
+- **Micro-intervals**: Added for pace variation
+- **ACWR**: 0.8-1.3
+- **Progression**: 10-15% max during build weeks (3 weeks up, 1 week down)
+- **Recovery**: Minimum 24 hours between quality sessions
+- **Speed work**: Introduced week 2-3
+
+### Performance-Focused (Speed Priority)
+- **Best for**: Experienced runners (3+ years), competitive racers, post-race building
+- **Intensity**: 75% easy / 25% hard (polarized early season, pyramidal near racing)
+- **Workouts**: 2 quality sessions per week from start
+- **Strides**: 3x per week from start
+- **ACWR**: 0.8-1.4 (brief controlled spikes only, not sustained)
+- **Progression**: 15-20% max during build weeks (still follows 3 up, 1 down)
+- **Recovery**: Minimum 48 hours between hard quality sessions
+- **Periodization**: Polarized in base phase, pyramidal near race
+- **Speed work**: Can start week 1-2
+- **⚠️ Higher injury risk**: For experienced runners only. ACWR spikes to 1.4 acceptable for 1-2 weeks only
 
 ## Example Use Cases
 
-- "Create a 12-week half marathon training plan for me"
-- "Build a 5K plan to improve my time, running 3 days per week"
-- "Help me safely increase my weekly mileage from 20 to 35 miles"
+- "Create a 12-week half marathon training plan for me" (skill will help choose appropriate profile)
+- "Build a performance-focused 5K plan to improve my time, I'm an experienced runner"
+- "I just ran a marathon 2 weeks ago and want to start training for a fall half marathon" (post-race scenario)
+- "Help me safely increase my weekly mileage from 20 to 35 miles with a conservative approach"
+- "Create a moderate intensity 10K plan with the 80/20 method, I have a solid base"
 - "I missed two weeks of training - how should I adjust my plan?"
 - "Create a base-building plan to establish a consistent running habit"
 
@@ -134,11 +177,27 @@ This skill is provided as-is for use with Claude AI. Feel free to modify and ada
 
 ## Version
 
-Current version: 1.2
+Current version: 1.3
 
 Last updated: February 2026
 
 ## Changelog
+
+### v1.3
+- **Three Training Profiles**: Conservative, Moderate, and Performance-Focused options
+  - Conservative: 85/15 intensity, 1 workout/week, ACWR 0.8-1.2 (injury prevention priority)
+  - Moderate: 80/20 intensity, 1-2 workouts/week, ACWR 0.8-1.3 (balanced approach)
+  - Performance-Focused: 75/25 intensity, 2 workouts/week, ACWR 0.8-1.4 (speed priority)
+- **Strides Integration**: 2-3x/week with detailed "how-to" explanations in every plan
+- **Pace Variation**: Research-based approach to prevent overuse injuries from repetitive strain
+- **Micro-Intervals**: Added to Moderate profile for pace variation without excessive fatigue
+- **Post-Race Planning**: Specialized protocols for experienced runners after race recovery
+- **Single-Session Spike Rule**: Monitor individual run increases (10% max of longest run in 30 days)
+- **Polarized Training Option**: Available for Performance-Focused profile
+- **Updated Research**: Based on 2024-2025 sports science findings on interval training and injury prevention
+- Speed work introduction varies by profile (week 4-6 Conservative, week 2-3 Moderate, week 1-2 Performance)
+- Strides shown to improve running economy 2% in 40 days per recent research
+- Profile selection guidance based on experience, injury history, and goals
 
 ### v1.2
 - **Strava Integration**: Added optional Strava MCP server integration
