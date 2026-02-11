@@ -21,13 +21,146 @@ This skill creates comprehensive, week-by-week training plans that include:
 
 **Important workflow**: This skill uses a structured information-gathering process. Always ask the required questions (age, running experience, recent training, injury history, goal, availability) BEFORE creating a plan. Wait for the user to confirm they're ready before generating the training plan. Do not skip this step.
 
+## Strava Integration (Optional Enhancement)
+
+**This skill is fully functional without Strava.** The standard question-based approach provides complete, comprehensive training plan creation for any runner.
+
+Strava integration is an optional enhancement that can make data gathering faster by automatically pulling your recent training history. This is purely a convenience feature - all the same information can be gathered through questions.
+
+### Benefits of Using Strava (Optional)
+
+When connected to Strava, this skill can optionally:
+- Analyze your last 4+ weeks of running activity for ACWR calculation
+- Calculate actual weekly mileage and training frequency
+- Determine your typical training paces from recent runs
+- Assess training consistency and patterns
+- View year-to-date and all-time running statistics
+
+This provides more accurate baseline data than manual estimates and saves time during the information-gathering phase.
+
+### Setting Up Strava MCP
+
+**Note**: Setting up Strava MCP requires obtaining API credentials from Strava, which takes about 10-15 minutes.
+
+**Quick setup overview:**
+1. Create a free Strava API application at [strava.com/settings/api](https://www.strava.com/settings/api)
+2. Set the authorization callback domain to "localhost"
+3. Note your Client ID and Client Secret
+4. Configure the Strava MCP server with your credentials
+5. Authorize the connection when prompted
+
+**Detailed instructions**: See the [Strava MCP GitHub repository](https://github.com/r-huijts/strava-mcp) for complete setup steps.
+
+### When Strava Integration Might Be Offered
+
+**Note**: Manual questions provide the same complete information - Strava is just an optional shortcut.
+
+At the start of the information-gathering process (only if creating a plan for yourself), the skill may:
+1. Offer to connect to your Strava account to auto-fill training data
+2. If you decline or if you're creating a plan for someone else, continue with standard questions
+3. If you accept and it's connected, pull recent training data and present for confirmation
+4. Still ask about injury history, age, goals, and other personal factors not available in Strava
+
+**Strava is only mentioned once.** If you decline or if you're coaching someone else, the conversation continues with standard questions without any further Strava references.
+
 ## Process for Creating Training Plans
 
 ### Step 1: Gather Essential Information
 
 **IMPORTANT**: Always gather required information BEFORE creating a training plan. Do not generate the plan until all required information is collected and the user confirms they're ready.
 
-#### Required Information (Must Ask)
+#### Preliminary: Check for Strava Integration (Optional Enhancement)
+
+**IMPORTANT**: The manual question process below is the complete, primary method for gathering information. Strava integration is purely an optional shortcut that can auto-fill some answers - the skill is fully functional without it.
+
+**Before beginning the standard question flow**, quickly check if Strava integration might be useful:
+
+1. **Identify the use case**:
+   - If user indicates they're creating a plan for **someone else** (coaching scenario): Skip Strava entirely, proceed directly to "Required Information" below
+   - If user is creating a plan for **themselves**: Attempt Strava connection
+
+2. **Attempt Strava connection** (only if creating plan for self):
+   - Try to access Strava MCP tools silently
+
+3. **Offer Strava option** (one time only):
+   - If connected: "I can connect to your Strava account to analyze your recent training, or I can ask you questions directly. Which would you prefer?"
+   - If not connected: "I can either ask you questions about your training history, or if you'd like, I can connect to Strava to pull your data automatically (requires setup). Which would you prefer?"
+
+4. **Handle user response and never mention Strava again**:
+   - **User wants to use Strava (already connected)**: Proceed to "Pulling Strava Data" below, then continue with remaining questions
+   - **User wants to set up Strava**: Offer brief help: "Setting up Strava MCP takes about 10-15 minutes. Would you like to do that now, or continue with questions?"
+     - If yes: Provide setup guidance, wait for completion, proceed to "Pulling Strava Data"
+     - If no: Proceed to "Required Information"
+   - **User prefers manual questions**: Proceed directly to "Required Information" below
+   - **Any decline/no**: Never mention Strava again in this conversation, proceed to "Required Information"
+
+#### Pulling Strava Data (If User Agrees)
+
+When user agrees to use Strava, pull and analyze the following data:
+
+**Data to retrieve**:
+1. **Recent activities** (last 4-8 weeks):
+   - Use Strava MCP to list activities
+   - Filter for activity type = "Run" only (includes treadmill and trail runs)
+   - Include both training runs and races
+   - Get: distance, duration, date, average pace for each activity
+
+2. **Year-to-date and all-time statistics**:
+   - Total runs, total distance, total time
+   - Provides context for training history
+
+3. **Training zones** (if configured in Strava):
+   - Heart rate zones
+   - Useful for understanding current fitness level
+
+**Analyze and calculate**:
+- Weekly mileage for each of the last 4 weeks
+- Running frequency (days per week) over last 4 weeks
+- Training consistency (gaps, patterns)
+- Typical training paces from recent runs
+- Current chronic load (average of last 4 weeks)
+
+**Present findings for confirmation**:
+After pulling data, present a summary and ask for confirmation:
+
+"Based on your Strava data, here's what I see:
+
+**Last 4 weeks:**
+- Week 1: [X] miles, [Y] runs
+- Week 2: [X] miles, [Y] runs
+- Week 3: [X] miles, [Y] runs
+- Week 4: [X] miles, [Y] runs
+
+**Recent patterns:**
+- Average: [X] miles/week over [Y] runs/week
+- Typical easy pace: [X:XX]/mile
+- Training consistency: [consistent/some gaps/spotty]
+
+**Additional context:**
+- Year-to-date: [X] runs, [Y] total miles
+- All-time: [X] runs since [account start date or first activity]
+
+Does this look accurate? Have you been running elsewhere (different app, no tracking) that I should know about?"
+
+**Handle sparse data**:
+If Strava shows very low volume (e.g., <5 runs in last month):
+- Present the data honestly: "I see [X] runs in the last month totaling [Y] miles"
+- Ask: "Have you been running elsewhere without tracking, or is this an accurate picture of your recent training?"
+- Note: "Based on this volume, I'll recommend a conservative progression to build safely"
+- If they confirm sparse training: Treat as novice/returning runner with high injury risk
+
+**Still ask these questions manually** (not available in Strava):
+- Age
+- Injury history (last 6 months)
+- Current pain or discomfort
+- Training goal (race distance, date, objective)
+- Desired training frequency (may differ from current)
+- Risk tolerance
+- Other relevant factors (life stress, scheduling constraints, etc.)
+
+#### Required Information
+
+**This is the primary, complete method for gathering information.** Whether or not Strava was used above, ask these questions systematically. If Strava data was pulled, some questions may already be answered - confirm the data rather than re-asking.
 
 Ask these questions systematically, waiting for responses before proceeding:
 
@@ -85,11 +218,62 @@ After gathering the required information:
 3. **Wait for user response**
 4. **Only after they indicate they're ready**, proceed with: "Great! Let me create your personalized training plan. This will take a moment as I analyze the best approach for your situation..."
 
-**Example dialogue flow:**
+**Example dialogue flow (with Strava):**
 
 User: "I want to train for a half marathon"
 
-Claude: "Excellent! I'd like to ask you a few questions to create the best training plan for you. First, how old are you?"
+Claude: "Excellent! Let me first check if I can connect to your Strava account to analyze your recent training..."
+
+Claude: [Attempts Strava MCP connection]
+
+Claude: "I can connect to your Strava account to analyze your recent training. Would you like me to pull your running data? This will make the process faster and more accurate."
+
+User: "Yes, please!"
+
+Claude: [Pulls Strava data and analyzes]
+
+Claude: "Great! Based on your Strava data, here's what I see:
+
+**Last 4 weeks:**
+- Week 1: 18 miles, 4 runs
+- Week 2: 20 miles, 4 runs
+- Week 3: 16 miles, 3 runs
+- Week 4: 22 miles, 5 runs
+
+**Recent patterns:**
+- Average: 19 miles/week over 4 runs/week
+- Typical easy pace: 9:45/mile
+- Training consistency: Mostly consistent with one lighter week
+
+**Additional context:**
+- Year-to-date: 87 runs, 412 total miles
+- Running since: January 2024
+
+Does this look accurate? Have you been running elsewhere (different app, no tracking) that I should know about?"
+
+User: "Yes, that's accurate. All my runs are on Strava."
+
+Claude: "Perfect! Now I need to ask you a few more questions that I can't get from Strava. First, how old are you?"
+
+User: "35"
+
+Claude: "Thanks! Based on your Strava history since January 2024, it looks like you've been running for about a year. Would you say that's accurate for how long you've been running consistently?"
+
+User: "Actually I ran in college, but took many years off. This is my comeback year."
+
+Claude: "That's helpful context! Have you had any injuries in the last 6 months, or do you have any current pain or discomfort?"
+
+[Continue with remaining manual questions: injury history, goal details, desired frequency, risk tolerance, etc.]
+
+**Example dialogue flow (without Strava - User Declines):**
+
+User: "I want to train for a half marathon"
+
+Claude: "Excellent! I can either ask you questions about your training history, or if you'd like, I can connect to Strava to pull your data automatically. Which would you prefer?"
+
+User: "Let's just do questions"
+
+Claude: "Sounds good! I'd like to ask you a few questions to create the best training plan for you. First, how old are you?"
 
 User: "35"
 
@@ -98,6 +282,22 @@ Claude: "Thanks! How long have you been running consistently?"
 User: "About 2 years"
 
 Claude: "Great. What has your training looked like recently - how many miles per week or days per week have you been running over the last month or so?"
+
+User: "I've been running 3-4 times per week, probably around 15-20 miles per week"
+
+[Continue with remaining questions - Strava is never mentioned again]
+
+**Example dialogue flow (Coaching Use Case):**
+
+User: "I want to create a half marathon training plan for my friend"
+
+Claude: "Excellent! I'd be happy to help you create a training plan for your friend. Let me ask you some questions about their training background and goals. First, how old are they?"
+
+User: "They're 28"
+
+Claude: "Thanks! How long have they been running consistently?"
+
+[Continue with all questions - Strava is never mentioned since this is for someone else]
 
 [Continue through required questions...]
 
@@ -370,6 +570,60 @@ The script provides functions to:
 
 **Use this proactively** when creating plans with multiple build weeks to verify ACWR stays in sweet spot.
 
+### Strava MCP Tools (If Available)
+
+When Strava MCP is connected, use these tools during the information-gathering phase:
+
+**Primary tools for training plan creation:**
+
+1. **List Recent Activities**:
+   - Tool: `strava_list_activities` or similar
+   - Purpose: Get last 4-8 weeks of running data
+   - Filters: Activity type = "Run" (includes road, trail, treadmill)
+   - Returns: Distance, duration, date, pace, elevation for each run
+   - Use for: Calculating weekly mileage, frequency, consistency patterns
+
+2. **Get Athlete Stats**:
+   - Tool: `strava_get_stats` or similar
+   - Purpose: Retrieve year-to-date and all-time statistics
+   - Returns: Total runs, total distance, total time
+   - Use for: Understanding overall training history and experience level
+
+3. **Get Training Zones** (optional):
+   - Tool: `strava_get_zones` or similar
+   - Purpose: Retrieve user's configured heart rate zones
+   - Returns: HR zone boundaries
+   - Use for: Understanding current fitness level if zones are set
+
+**How to use the data:**
+
+1. **Calculate weekly totals**: Sum distance and count activities for each of the last 4 weeks
+2. **Determine frequency**: Calculate average days/week of running
+3. **Assess consistency**: Look for gaps, patterns, or recent changes
+4. **Extract paces**: Use average pace from recent easy runs for pace calculations
+5. **Calculate current ACWR**: Use last 4 weeks to determine baseline chronic load
+
+**Important filtering:**
+- Only count activities where `type = "Run"`
+- Include all run types: road, trail, treadmill, virtual
+- Include both training runs and races
+- DO NOT pull or use weight data from Strava
+
+**Example MCP tool usage:**
+```
+# Check if Strava is available and connected
+# Attempt to list recent activities
+# Filter for runs only
+# Analyze last 4-8 weeks of data
+# Present summary to user for confirmation
+```
+
+**When Strava data is sparse or missing:**
+- Present what you found honestly
+- Ask if they've been running elsewhere (different app, no tracking)
+- Use sparse data as an indicator for conservative progression
+- Fill in gaps with manual questions
+
 ### Reference Documents
 
 **Read these references as needed:**
@@ -547,7 +801,8 @@ Do you have any other information you'd like me to know before I create your tra
 
 ## Critical Reminders
 
-- **ALWAYS gather required information FIRST** - Ask about age, running experience, recent training, injury history, goal, and availability. Wait for user confirmation before generating plan
+- **STRAVA IS OPTIONAL** - Manual questions are the complete, primary method. Strava is just a shortcut. Only mention Strava once at the start. If user declines or is creating plan for someone else, never mention Strava again.
+- **ALWAYS gather required information FIRST** - Whether using Strava or manual questions, collect: age, running experience, recent training, injury history, goal, and availability. Wait for user confirmation before generating plan
 - **ACWR 0.8-1.3 is the target** - stay in sweet spot for injury prevention
 - **Deload weeks are non-negotiable** - plan them every 3-4 weeks
 - **Progress ONE variable at a time** - never increase frequency, duration, AND intensity simultaneously

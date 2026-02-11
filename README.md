@@ -8,6 +8,7 @@ This skill enables Claude to create comprehensive training plans for runners of 
 
 ## Key Features
 
+- **Strava Integration**: Optional automatic data import from Strava via MCP server for accurate training history analysis
 - **Personalized Plans**: Customized based on age, experience, injury history, and goals
 - **Injury Prevention**: Uses Acute:Chronic Workload Ratio (ACWR) to keep injury risk low
 - **Progressive Training**: Safe weekly increases with mandatory deload weeks every 3-4 weeks
@@ -40,13 +41,14 @@ running-training-plans/
 
 When creating a training plan, Claude follows this process:
 
-1. **Gather Information**: Systematically asks about age, experience, recent training, injuries, goals, and availability
-2. **Confirm Readiness**: Summarizes information and waits for user confirmation
-3. **Assess Risk**: Calculates injury risk score and determines appropriate conservativeness
-4. **Calculate Paces**: Determines training zones from race times or conversational pace
-5. **Design Progression**: Plans safe weekly increases maintaining ACWR 0.8-1.3
-6. **Structure Schedule**: Distributes workouts based on available days and experience
-7. **Create Plan**: Generates week-by-week markdown document with detailed daily workouts
+1. **Check for Strava** (optional): Attempts to connect to Strava MCP to automatically pull recent training data
+2. **Gather Information**: Uses Strava data or systematically asks about age, experience, recent training, injuries, goals, and availability
+3. **Confirm Readiness**: Summarizes information and waits for user confirmation
+4. **Assess Risk**: Calculates injury risk score and determines appropriate conservativeness
+5. **Calculate Paces**: Determines training zones from recent runs, race times, or conversational pace
+6. **Design Progression**: Plans safe weekly increases maintaining ACWR 0.8-1.3
+7. **Structure Schedule**: Distributes workouts based on available days and experience
+8. **Create Plan**: Generates week-by-week markdown document with detailed daily workouts
 
 ## Example Use Cases
 
@@ -63,6 +65,38 @@ This skill is designed for use with Claude AI. To use it:
 1. Download the skill package (`running-training-plans.zip`)
 2. Upload to Claude via the Skills interface
 3. The skill will automatically activate when you ask about running training plans
+
+## Strava Integration (Optional)
+
+**This skill is fully functional without Strava.** Manual questions provide complete, comprehensive training plan creation.
+
+Strava integration is an optional enhancement that can make data gathering faster by automatically pulling your recent training history. It's purely a convenience feature - perfect for individual runners who track their runs on Strava. Coaches creating plans for others or runners who don't use Strava will use the standard question-based approach, which is equally complete.
+
+### Benefits
+
+- Automatically pulls your last 4+ weeks of running data
+- Calculates accurate weekly mileage and training frequency
+- Identifies your typical training paces from recent runs
+- Assesses training consistency and patterns
+- No need to manually estimate your recent training volume
+
+### Setup
+
+To use Strava integration, you'll need to set up the [Strava MCP server](https://github.com/r-huijts/strava-mcp):
+
+1. Create a free Strava API application at [strava.com/settings/api](https://www.strava.com/settings/api)
+2. Set the authorization callback domain to "localhost"
+3. Configure the Strava MCP server with your Client ID and Secret
+4. Authorize the connection when prompted
+
+Setup takes about 10-15 minutes. **Strava setup is completely optional** - the skill works perfectly well without it. If you're creating plans for others (coaching) or prefer not to connect Strava, simply use the standard question-based approach.
+
+### Privacy
+
+- Your Strava data is only accessed when you explicitly request it
+- Only running activities are analyzed (no other activity types)
+- Weight and other personal data are not pulled or used
+- All data processing happens during the conversation and is not stored
 
 ## Safety Philosophy
 
@@ -100,11 +134,20 @@ This skill is provided as-is for use with Claude AI. Feel free to modify and ada
 
 ## Version
 
-Current version: 1.1
+Current version: 1.2
 
-Last updated: October 2025
+Last updated: February 2026
 
 ## Changelog
+
+### v1.2
+- **Strava Integration**: Added optional Strava MCP server integration
+- Automatic training data analysis from Strava activities
+- Pulls last 4+ weeks of running data for ACWR calculation
+- Automatic pace analysis from recent runs
+- Training consistency assessment
+- Setup guidance for Strava API connection
+- Fallback to manual questions if Strava not available
 
 ### v1.1
 - Added structured information-gathering process
