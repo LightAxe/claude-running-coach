@@ -1,5 +1,17 @@
 # Injury Risk Assessment Framework
 
+## Contents
+- [Initial Assessment Questions](#initial-assessment-questions)
+- [Risk Scoring System](#risk-scoring-system)
+- [Plan Adjustments Based on Risk](#plan-adjustments-based-on-risk)
+- [Warning Signs & Intervention](#warning-signs--intervention)
+- [Age-Specific Considerations](#age-specific-considerations)
+- [Return from Injury Protocol](#return-from-injury-protocol)
+- [Strength Training Integration](#strength-training-integration)
+- [Communication in Training Plans](#communication-in-training-plans)
+
+---
+
 ## Initial Assessment Questions
 
 When creating a training plan, gather this information to assess injury risk:

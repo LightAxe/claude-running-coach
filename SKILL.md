@@ -1,6 +1,6 @@
 ---
 name: running-training-plans
-description: Create personalized running training plans, modify existing plans, analyze running performance, and provide injury prevention guidance. Use when users ask about training schedules, building a running plan, preparing for races (5K, 10K, half marathon, marathon), increasing running distance or speed, or managing training load to prevent injuries. Supports creating week-by-week plans with detailed daily workouts, calculating training paces, assessing injury risk, and adjusting plans for missed workouts or life events.
+description: Create personalized, evidence-based running training plans for any race distance (5K to marathon) or general fitness goal. Use this skill whenever someone wants to prepare for a race, structure their running, or safely build mileage — including when they phrase it as a question ("how do I train for my first half marathon?") rather than an explicit plan request. Covers weekly schedules, training paces, load management (ACWR), injury risk assessment, and adjusting plans for missed workouts or life events.
 ---
 
 <!--
@@ -24,8 +24,6 @@ This skill creates comprehensive, week-by-week training plans that include:
 
 **Core principle**: Manage acute vs chronic training load to stay in the "sweet spot" (ACWR 0.8-1.3) while safely building fitness.
 
-**Important workflow**: This skill uses a structured information-gathering process. Always ask the required questions (age, running experience, recent training, injury history, goal, availability) BEFORE creating a plan. Wait for the user to confirm they're ready before generating the training plan. Do not skip this step.
-
 ## Strava Integration (Optional Enhancement)
 
 **This skill is fully functional without Strava.** The standard question-based approach provides complete, comprehensive training plan creation for any runner.
@@ -43,19 +41,6 @@ When connected to Strava, this skill can optionally:
 
 This provides more accurate baseline data than manual estimates and saves time during the information-gathering phase.
 
-### Setting Up Strava MCP
-
-**Note**: Setting up Strava MCP requires obtaining API credentials from Strava, which takes about 10-15 minutes.
-
-**Quick setup overview:**
-1. Create a free Strava API application at [strava.com/settings/api](https://www.strava.com/settings/api)
-2. Set the authorization callback domain to "localhost"
-3. Note your Client ID and Client Secret
-4. Configure the Strava MCP server with your credentials
-5. Authorize the connection when prompted
-
-**Detailed instructions**: See the [Strava MCP GitHub repository](https://github.com/r-huijts/strava-mcp) for complete setup steps.
-
 ### When Strava Integration Might Be Offered
 
 **Note**: Manual questions provide the same complete information - Strava is just an optional shortcut.
@@ -70,69 +55,25 @@ At the start of the information-gathering process (only if creating a plan for y
 
 ## Training Intensity Profiles
 
-This skill offers three training intensity profiles based on recent sports science research (2024-2025). Each balances performance and injury risk differently.
+Three profiles are available. See `references/training-profiles.md` for full specs, weekly distribution matrices, stride guidance, and research basis.
 
-### Profile Overview
+| Profile | Best for | ACWR target | Intensity | Progression |
+|---------|----------|-------------|-----------|-------------|
+| **Conservative** | Beginners, injury-prone, 40+, returning | 0.8–1.2 | 85/15 easy/hard | 5–10%/week |
+| **Moderate** | Intermediate (1–3 years), solid base | 0.8–1.3 | 80/20 | 10–15%/week |
+| **Performance-Focused** ⚠️ | Experienced (3+ years), competitive | 0.8–1.4 | 75/25 or polarized | 15–20%/week |
 
-**Conservative (Default for Most Runners)**
-- **Best for**: Beginners, injury-prone runners, those building base, runners over 40, returning from injury
-- **Intensity split**: 85% easy / 15% hard (true beginners: start 90-100% easy for first 2-3 months)
-- **Workout frequency**: 1 quality session per week
-- **Strides**: 2x per week (after base phase)
-- **Target ACWR**: 0.8-1.2
-- **Weekly progression**: 5-10% (following 3 weeks up, 1 week down pattern)
-- **Speed work introduction**: Week 4-6 (beginners may delay to 8-12 weeks)
-- **Philosophy**: Safety first, arrive healthy at start line
-
-**Moderate (Balanced Approach)**
-- **Best for**: Intermediate runners (1-3 years), injury-free with solid base, general fitness goals
-- **Intensity split**: 80% easy / 20% hard (true 80/20 rule)
-- **Workout frequency**: 1-2 quality sessions per week (build from 1 to 2)
-- **Strides**: 3x per week
-- **Micro-intervals**: Added to easy runs for variation
-- **Target ACWR**: 0.8-1.3
-- **Weekly progression**: 10-15% max during build weeks (3 weeks up, 1 week down)
-- **Recovery**: Minimum 24 hours between quality sessions
-- **Speed work introduction**: Week 2-3
-- **Philosophy**: Balance performance gains with injury prevention
-
-**Performance-Focused (Speed Priority)**
-- **Best for**: Experienced runners (3+ years), competitive racers, those with strong training history, post-race building to next goal
-- **Intensity split**: 75% easy / 25% hard (use polarized early season, pyramidal near racing)
-- **Workout frequency**: 2 quality sessions per week from start
-- **Strides**: 3x per week from week 1
-- **Target ACWR**: 0.8-1.4 (accepts brief controlled spikes, not sustained)
-- **Weekly progression**: 15-20% max during build weeks (still follow 3 up, 1 down pattern)
-- **Recovery**: Minimum 48 hours between hard quality sessions
-- **Speed work introduction**: Week 1-2 (can start immediately for experienced runners)
-- **Periodization**: Polarized (lots easy, lots hard) in base phase; pyramidal (more threshold) near race
-- **Philosophy**: Maximize performance gains, accept higher injury risk
-- **Warning**: ⚠️ This profile carries significantly higher injury risk. Only for experienced runners with strong training history.
-
-### Research Basis
-
-Recent research (2024-2025) shows:
-- **Pace variation prevents overuse injuries**: Running the same pace repeatedly causes repetitive microtrauma. [80-90% of running injuries occur suddenly during single sessions, often from lack of variation](https://medicalxpress.com/news/2025-07-injuries-suddenly-gradually-overuse.html)
-- **Strides improve economy with low injury risk**: 2% running economy improvement and 3.2% performance gain after just 40 days
-- **Interval training enhances performance**: 6-7% VO2max improvement in 6 weeks, but injury data is limited
-- **Polarized training works**: 30% greater marathon improvement vs. pyramidal approach in recent studies
-- **Individual response varies**: 31.5% respond best to polarized, 31.9% to pyramidal, 18.7% to both
-
-### Single-Session Spike Warning
-
-**Critical 2025 finding**: Injury risk increases significantly when any single run exceeds 10% of the longest run in the last 30 days. Monitor individual session spikes, not just weekly totals.
-
-**Note on the 10% Rule**: While the classic "10% weekly mileage increase" rule is widely known, recent research shows individual variation matters significantly. The "3 weeks up, 1 week down" pattern with appropriate percentage increases based on experience level is more effective than rigid 10% limits. Low-mileage runners can often increase by higher percentages; high-mileage runners should be more conservative.
+Default to Conservative for most runners. Performance-Focused carries significantly higher injury risk and is for experienced runners with a strong training history only.
 
 ## Process for Creating Training Plans
 
 ### Step 1: Gather Essential Information
 
-**IMPORTANT**: Always gather required information BEFORE creating a training plan. Do not generate the plan until all required information is collected and the user confirms they're ready.
+Collect all required information and confirm with the runner before generating a plan. The questions below are designed to surface the factors that most affect plan safety and appropriateness — skipping them risks producing a plan that looks reasonable but is wrong for this specific person.
 
 #### Preliminary: Check for Strava Integration (Optional Enhancement)
 
-**IMPORTANT**: The manual question process below is the complete, primary method for gathering information. Strava integration is purely an optional shortcut that can auto-fill some answers - the skill is fully functional without it.
+The manual question process below is the complete, primary method — Strava is a shortcut that auto-fills some answers, not a dependency.
 
 **Before beginning the standard question flow**, quickly check if Strava integration might be useful:
 
@@ -147,13 +88,13 @@ Recent research (2024-2025) shows:
    - If connected: "I can connect to your Strava account to analyze your recent training, or I can ask you questions directly. Which would you prefer?"
    - If not connected: "I can either ask you questions about your training history, or if you'd like, I can connect to Strava to pull your data automatically (requires setup). Which would you prefer?"
 
-4. **Handle user response and never mention Strava again**:
+4. **Handle user response** — offer Strava once only; if the user declines or is coaching someone else, drop it and move straight to the questions:
    - **User wants to use Strava (already connected)**: Proceed to "Pulling Strava Data" below, then continue with remaining questions
    - **User wants to set up Strava**: Offer brief help: "Setting up Strava MCP takes about 10-15 minutes. Would you like to do that now, or continue with questions?"
      - If yes: Provide setup guidance, wait for completion, proceed to "Pulling Strava Data"
      - If no: Proceed to "Required Information"
    - **User prefers manual questions**: Proceed directly to "Required Information" below
-   - **Any decline/no**: Never mention Strava again in this conversation, proceed to "Required Information"
+   - **Any decline/no**: Proceed to "Required Information" — no further Strava mentions
 
 #### Pulling Strava Data (If User Agrees)
 
@@ -393,8 +334,6 @@ Claude: "Perfect! Let me create your personalized training plan. This will take 
 
 [Then proceed with Steps 2-7]
 
-**Critical**: Do NOT skip the information gathering phase. Do NOT generate a plan until you have confirmed the runner is ready. Missing key information (especially age, experience, injuries, and recent training) leads to inappropriate or potentially dangerous plans.
-
 ### Step 2: Calculate Training Paces
 
 Read `references/pace-calculations.md` to:
@@ -443,129 +382,15 @@ Read `references/training-load-principles.md` to understand:
 - Deload week frequency and structure
 - Intensity distribution based on profile
 
-**Plan structure by Training Profile**:
-
-**Conservative Profile:**
-- Weekly increases: 5-10% max during build weeks
-- Pattern: 3 weeks up, 1 week down (deload)
-- Deload: Every 3-4 weeks (30-40% volume reduction from peak)
-- ACWR target: 0.8-1.2
-- Intensity split: 85/15 (easy/hard) - true beginners start 90-100% easy for first 2-3 months
-- Speed work introduction: Week 4-6 for intermediate; week 8-12 for true beginners
-- Strides: 2x/week starting week 2-3
-- Workout frequency: 1 quality session/week
-- Philosophy: Slow and steady, prioritize consistency and injury prevention
-
-**Moderate Profile:**
-- Weekly increases: 10-15% max during build weeks (not every week)
-- Pattern: 3 weeks up, 1 week down (deload)
-- Deload: Every 3 weeks (30% volume reduction from peak)
-- ACWR target: 0.8-1.3
-- Intensity split: 80/20 (true 80/20 rule)
-- Speed work introduction: Week 2-3
-- Strides: 3x/week starting week 1-2
-- Micro-intervals: Add 30-60 sec pickups to easy runs for pace variation
-- Workout frequency: 1-2 quality sessions/week (build from 1 to 2 over 4-6 weeks)
-- Recovery: Minimum 24 hours between quality sessions
-- Philosophy: Balanced performance and safety
-
-**Performance-Focused Profile:**
-- Weekly increases: 15-20% max during build weeks (still follow 3-up-1-down pattern, not sustained)
-- Pattern: 3 weeks up, 1 week down (sometimes 2 up, 1 down if very aggressive)
-- Deload: Every 3-4 weeks (30% volume reduction)
-- ACWR target: 0.8-1.4 (accepts brief controlled spikes to 1.4, not sustained above 1.3)
-- Intensity split: 75/25 or polarized distribution
-- Periodization: Polarized (very easy + very hard) in base/early season; pyramidal (more threshold) near racing
-- Speed work introduction: Week 1-2 (can start immediately for experienced runners)
-- Strides: 3x/week from week 1
-- Workout frequency: 2 quality sessions/week from start
-- Recovery: Minimum 48 hours between hard quality sessions (easy days or rest between)
-- Philosophy: Maximize speed development, accept higher injury risk
-- **Monitor single-session spikes**: No single run >110% of longest run in last 30 days
-- **Warning**: Brief ACWR spikes to 1.4 acceptable for 1-2 weeks only, then must return to 1.3 or below
-
-**Critical rules (all profiles)**:
-- Progress only ONE variable at a time (frequency, duration, OR intensity)
-- Monitor ACWR weekly
-- Respect deload weeks (non-negotiable)
-- Allow 48 hours between hard workouts
-
-**Post-race scenarios**:
-- After race: 1-2 week recovery period (easy running only, 50-70% of pre-race volume)
-- Then: Experienced runners can jump into Performance-Focused if desired
-- Base-building phase may be minimal (1-2 weeks) for experienced post-race runners
+Read `references/training-profiles.md` for complete per-profile progression specs (ACWR targets, deload timing, intensity splits, speed work introduction, cross-profile rules, and post-race scenarios).
 
 ### Step 5: Determine Weekly Run Distribution
 
-Based on the runner's desired frequency and training profile, determine the types and distribution of runs each week:
-
-**3 days/week** (beginner or time-limited):
-- 2 easy runs
-- 1 long run
-- **Conservative**: Strides 1-2x/week after week 2-3, one workout after week 4-6
-- **Moderate**: Strides 2x/week from week 2, one workout from week 3
-- **Performance-Focused**: Strides 2x/week from week 1, one workout from week 1-2
-
-**4 days/week** (intermediate):
-- 2 easy runs
-- 1 workout (tempo or intervals)
-- 1 long run
-- **Conservative**: Strides 2x/week, 1 workout/week from week 4-6
-- **Moderate**: Strides 3x/week, 1 workout/week from week 2, build to 2 workouts by mid-plan
-- **Performance-Focused**: Strides 3x/week from week 1, 2 workouts/week from week 2
-
-**5 days/week** (intermediate to advanced):
-- 2-3 easy runs (one may be recovery run)
-- 1-2 workouts (different stimulus - e.g., tempo + intervals)
-- 1 long run
-- **Conservative**: Strides 2x/week, 1 workout/week
-- **Moderate**: Strides 3x/week, 1-2 workouts/week (vary the stimulus)
-- **Performance-Focused**: Strides 3x/week, 2 workouts/week (polarized or pyramidal)
-
-**6-7 days/week** (advanced):
-- 3-4 easy/recovery runs
-- 2 quality sessions per week (tempo, intervals, etc.)
-- 1 long run
-- May include double-run days for high volume
-- **All profiles**: Strides 3x/week, 2 workouts/week minimum
-
-**What are Strides?**
-
-Strides are short 20-30 second bursts at 85-90% effort (not a full sprint) that improve running economy, form, and speed with minimal injury risk. Research shows 2% running economy improvement and 3.2% performance gain from just 1-2 stride sessions per week.
-
-**How to do strides**:
-1. Do them AFTER an easy run (not when fatigued from hard workouts)
-2. Find a flat, clear section of road or track
-3. Gradually accelerate for 20-30 seconds up to about 85-90% of max effort
-4. Focus on smooth, controlled form - not an all-out sprint
-5. Decelerate gradually, then walk back to start (full recovery, 60-90 seconds)
-6. Repeat 4-8 times depending on fitness level
-7. Total time: 5-10 minutes
-
-**Example**: "After your 5-mile easy run, find a flat section and do 6 strides: accelerate smoothly for 20 seconds to about mile race pace, then walk back for full recovery. Focus on quick, light turnover."
-
-**Micro-intervals (Moderate profile)**:
-
-For pace variation without excessive fatigue, add 30-60 second pickups during easy runs:
-- During middle 3-4 miles of an easy run
-- 30-60 seconds at steady/moderate pace (not hard)
-- 2-3 minutes easy recovery
-- Repeat 4-6 times
-- Purpose: Vary stimulus, prevent repetitive strain
-
-**Workout distribution principles**:
-- Hard workouts need at least 48 hours between them (easy day or rest day)
-- Long run is typically the longest single effort of the week
-- Easy runs make up 75-85% of weekly volume depending on profile
-- Strides don't count as "intensity" workload (too short)
-- Recovery runs (when doing 6+ days/week) are shorter and easier than regular easy runs
-- **Pace variation is injury prevention**: Never run the same pace every run
-
-**Note**: Since plans don't assign specific days, remind runners to space hard efforts appropriately when scheduling their own week.
+Read `references/training-profiles.md` for the full weekly distribution matrix (3, 4, 5, and 6–7 days/week × profile), stride execution guidance, micro-interval instructions, and workout distribution principles.
 
 ### Step 6: Create Week-by-Week Plan
 
-**IMPORTANT**: Plans should list runs for each week WITHOUT assigning them to specific days. Let runners schedule runs based on their own calendar and preferences.
+List runs for each week without assigning them to specific days. Runners have different schedules and commitments — a plan that locks in specific days feels rigid and is harder to stick to when life gets in the way.
 
 Generate a markdown document with this structure:
 
@@ -626,7 +451,7 @@ Some easy runs include micro-intervals to prevent repetitive strain injury. Thes
 ## How to Use This Plan
 - Schedule runs on days that work for your calendar
 - Ideally space runs throughout the week
-- **CRITICAL**: Keep hard workouts separated by at least 48 hours (one easy day or rest)
+- Keep hard workouts separated by at least 48 hours — muscles need time to repair and adapt after quality sessions, and stacking them prevents the recovery that makes training effective
 - [If 2 workouts/week]: Space quality sessions evenly (e.g., Tuesday/Saturday)
 - Rest days are flexible - take them when needed
 - [If frequency is increasing from current]: We're building from X to Y days per week gradually
@@ -1022,22 +847,6 @@ Do you have any other information you'd like me to know before I create your tra
 **Claude**: "Perfect! Let me create your personalized training plan. This will take a moment as I analyze the best approach for your situation..."
 
 [Then proceed with Steps 2-7: Read references, assess risk, calculate paces, design progression, create plan]
-
-## Critical Reminders
-
-- **STRAVA IS OPTIONAL** - Manual questions are the complete, primary method. Strava is just a shortcut. Only mention Strava once at the start. If user declines or is creating plan for someone else, never mention Strava again.
-- **TRAINING PROFILES AVAILABLE** - Offer Conservative, Moderate, or Performance-Focused based on runner's goals and experience. Respect user choice but warn if mismatch with injury risk.
-- **ALWAYS gather required information FIRST** - Collect: age, running experience, recent training, injury history, goal, desired frequency, and training profile preference. Wait for user confirmation before generating plan.
-- **PACE VARIATION PREVENTS INJURY** - Never create plans with same pace every run. Include strides, varied workouts, and micro-intervals (Moderate profile) to prevent repetitive strain.
-- **STRIDES ARE STANDARD** - Include 2-3x/week after week 1-2 for all profiles. Explain what they are and how to do them in every plan.
-- **ACWR targets by profile** - Conservative: 0.8-1.2, Moderate: 0.8-1.3, Performance-Focused: 0.8-1.4
-- **Single-session spike rule** - No run should exceed 10% of longest run in last 30 days
-- **Deload weeks are non-negotiable** - plan them every 3-4 weeks for all profiles
-- **Progress ONE variable at a time** - never increase frequency, duration, AND intensity simultaneously
-- **Intensity distribution by profile** - Conservative: 85/15, Moderate: 80/20, Performance-Focused: 75/25 or polarized
-- **POST-RACE EXPERIENCED RUNNERS** - Can jump to Performance-Focused after 1-2 week recovery. Don't force conservative base phase on established runners.
-- **Individual risk factors matter** - assess injury risk but respect user's informed choice of profile
-- **Flexibility is essential** - real life disrupts training; plans should accommodate this
 
 ## Output Format
 
