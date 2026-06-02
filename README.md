@@ -11,7 +11,7 @@ This skill enables Claude to create comprehensive training plans for runners of 
 - **Three Training Profiles**: Choose Conservative (injury prevention focus), Moderate (balanced 80/20), or Performance-Focused (speed priority with higher intensity)
 - **Pace Variation for Injury Prevention**: Integrates strides, micro-intervals, and varied workouts to prevent overuse injuries from repetitive strain
 - **Strides Integration**: Research-backed 20-30 second bursts improve running economy by 2% with minimal injury risk, included 2-3x/week
-- **Strava Integration**: Optional automatic data import from Strava via MCP server for accurate training history analysis
+- **Flexible Data Import**: Pulls recent training automatically via Strava's native MCP connector (paid Strava), or works from an export/screenshot of any platform (Garmin, Apple Health, Intervals.icu), or a quick conversation
 - **Post-Race Planning**: Specialized protocols for experienced runners building to next race after recovery period
 - **Personalized Plans**: Customized based on age, experience, injury history, goals, and speed vs. safety preference
 - **Injury Prevention**: Uses Acute:Chronic Workload Ratio (ACWR) with single-session spike monitoring
@@ -36,17 +36,21 @@ running-training-plans/
 ├── scripts/
 │   └── calculate_acwr.py            # ACWR calculation utilities
 └── references/
+    ├── training-profiles.md         # Profile specs, weekly distribution, stride guidance
     ├── training-load-principles.md  # ACWR, progression rates, deload protocols
     ├── pace-calculations.md         # Training zones, workout types, pace adjustments
-    └── injury-risk-assessment.md    # Risk scoring, plan adjustments, warning signs
+    ├── injury-risk-assessment.md    # Risk scoring, plan adjustments, warning signs
+    ├── data-import.md               # Sourcing recent training data (connector/export/Q&A)
+    ├── plan-output-format.md        # Plan document template, formatting, worked example
+    └── plan-types.md                # Distance-specific structure (5K/10K/half/marathon)
 ```
 
 ## How It Works
 
 When creating a training plan, Claude follows this process:
 
-1. **Check for Strava** (optional): Attempts to connect to Strava MCP to automatically pull recent training data
-2. **Gather Information**: Uses Strava data or systematically asks about age, experience, recent training, injuries, goals, and training profile preference
+1. **Source recent data**: Silently tries Strava's native MCP connector; if it's not available, works from an export/screenshot of any platform or a quick conversation
+2. **Gather Information**: Uses imported data where available, and systematically asks about age, experience, recent training, injuries, goals, and training profile preference
 3. **Select Training Profile**: Choose Conservative, Moderate, or Performance-Focused based on goals and experience
 4. **Confirm Readiness**: Summarizes information and waits for user confirmation
 5. **Assess Risk**: Calculates injury risk score and provides guidance if mismatch with chosen profile
@@ -109,37 +113,23 @@ This skill is designed for use with Claude AI. To use it:
 2. Upload to Claude via the Skills interface
 3. The skill will automatically activate when you ask about running training plans
 
-## Strava Integration (Optional)
+## Getting Your Training Data
 
-**This skill is fully functional without Strava.** Manual questions provide complete, comprehensive training plan creation.
+The skill needs a picture of your recent running — roughly the last 4–6 weeks of mileage, frequency, and pace. There are three ways to get there, and a short conversation is often the fastest:
 
-Strava integration is an optional enhancement that can make data gathering faster by automatically pulling your recent training history. It's purely a convenience feature - perfect for individual runners who track their runs on Strava. Coaches creating plans for others or runners who don't use Strava will use the standard question-based approach, which is equally complete.
+1. **Strava native MCP connector** — As of June 2026, Strava offers an [official MCP connector](https://press.strava.com/articles/strava-launches-mcp-connector) that lets Claude read your training directly. It requires a **paid Strava subscription** and that you've enabled the connector in your Claude settings. The skill detects it automatically and uses it if it's there — no manual setup walkthrough, no API keys.
+2. **An export or screenshot from any platform** — Don't have the connector? Share an export or a screenshot of your recent weeks from whatever you use (Strava, Garmin, Apple Health, Intervals.icu). Note that full Strava/Garmin exports are emailed to you and can take hours to arrive, so a screenshot of recent weeks is usually quicker.
+3. **Just tell the skill** — A quick Q&A about your recent running is a complete method, not a fallback. When exports are delayed and the connector isn't set up, it's often the fastest path.
 
-### Benefits
+If your data isn't available right now (e.g., an export is still pending), the skill can build a **conservative provisional plan** from what you tell it and recalibrate later when real data arrives — or you can wait and build the plan once the export is ready. A conversation is easy to return to.
 
-- Automatically pulls your last 4+ weeks of running data
-- Calculates accurate weekly mileage and training frequency
-- Identifies your typical training paces from recent runs
-- Assesses training consistency and patterns
-- No need to manually estimate your recent training volume
-
-### Setup
-
-To use Strava integration, you'll need to set up the [Strava MCP server](https://github.com/r-huijts/strava-mcp):
-
-1. Create a free Strava API application at [strava.com/settings/api](https://www.strava.com/settings/api)
-2. Set the authorization callback domain to "localhost"
-3. Configure the Strava MCP server with your Client ID and Secret
-4. Authorize the connection when prompted
-
-Setup takes about 10-15 minutes. **Strava setup is completely optional** - the skill works perfectly well without it. If you're creating plans for others (coaching) or prefer not to connect Strava, simply use the standard question-based approach.
+> **Note on the Strava community server:** Earlier versions of this skill walked you through setting up a self-hosted Strava MCP server with your own API key. Strava's June 2026 API changes require a paid subscription for that path too and restrict third-party intermediaries, so the native connector (for subscribers) plus the export/conversation paths (for everyone) replace it.
 
 ### Privacy
 
-- Your Strava data is only accessed when you explicitly request it
-- Only running activities are analyzed (no other activity types)
-- Weight and other personal data are not pulled or used
-- All data processing happens during the conversation and is not stored
+- Imported data is only used during the conversation and isn't stored
+- Only running activities are analyzed; body-weight data is not pulled or used
+- An export or screenshot can contain a fair amount of personal health data — share only what you're comfortable with (a screenshot of recent weeks is plenty)
 
 ## Safety Philosophy
 
@@ -181,11 +171,21 @@ You are free to use, modify, and distribute this skill, including for commercial
 
 ## Version
 
-Current version: 1.3
+Current version: 2.0
 
-Last updated: February 2026
+Last updated: June 2026
 
 ## Changelog
+
+### v2.0
+- **Pivot to Strava's native MCP connector**: Strava launched an official first-party MCP connector (June 1, 2026). The skill now detects it silently and uses it when present — no API app, Client ID/Secret, callback domain, or 10–15 minute setup walkthrough.
+- **Removed the self-hosted community-server setup**: Strava's June 2026 API changes require a paid subscription for self-hosted Standard Tier access (new developers immediately; existing by June 30, 2026) and restrict third-party intermediary platforms, removing the old "free" advantage. The native connector (paid Strava) plus export/conversation paths replace it.
+- **Data-source-agnostic import**: Works from an export or screenshot of any platform (Strava, Garmin, Apple Health, Intervals.icu), not just Strava. Screenshots of recent weeks are encouraged since full exports are emailed and delayed.
+- **Question-based flow elevated**: A short Q&A is now framed as a complete, often-fastest method — the genuine path for non-subscribers and coaches — not a fallback.
+- **Provisional plans for pending data**: When an export hasn't arrived yet, the skill offers to build a conservative starter plan now and recalibrate later, or wait — the user chooses.
+- **Conservative posture for unverified data**: Question-based and provisional plans default to (don't force) the Conservative profile and start volume at the low end of the stated range.
+- **Privacy heads-up**: Brief, non-blocking note that exports/screenshots may contain personal health data.
+- New `references/data-import.md` consolidates the data-gathering flow and per-platform details.
 
 ### v1.3
 - **Three Training Profiles**: Conservative, Moderate, and Performance-Focused options
